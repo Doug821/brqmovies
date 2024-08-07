@@ -16,6 +16,7 @@ export default function Details() {
   return (
     <ScrollView style={styles.container}>
       <Image
+        testID='movie-image'
         source={{
           uri: `https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`,
         }}
