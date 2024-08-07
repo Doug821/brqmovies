@@ -9,6 +9,7 @@ interface ButtonProps extends TouchableOpacityProps {
 export const Button: React.FC<ButtonProps> = (props) => {
   return (
     <TouchableOpacity
+      testID='button-touchable'
       {...props}
       style={[
         styles.button,

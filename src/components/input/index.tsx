@@ -47,6 +47,7 @@ export const Input: React.FC<InputProps> = (props) => {
       >
         {props.icon && <props.icon color={props.color} />}
         <TextInput
+          testID='input-component'
           {...props}
           style={[styles.input, props.style]}
           onFocus={handleInputFocus}

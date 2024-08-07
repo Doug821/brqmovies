@@ -15,8 +15,10 @@ export const MovieCard: React.FC<MovieCardProps> = (props) => {
     <TouchableOpacity
       {...props}
       style={[styles.container, margin, props.style]}
+      testID='movie-card'
     >
       <Image
+        testID='movie-image'
         source={{
           uri: `https://image.tmdb.org/t/p/w500${props.movie.poster_path}`,
         }}

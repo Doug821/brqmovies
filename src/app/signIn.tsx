@@ -62,6 +62,7 @@ export default function SignIn() {
         />
         <View style={styles.buttonWrapper}>
           <Button
+            testID='signInButton'
             onPress={handleSignIn}
             label='Entrar'
             disabled={isSigninButtonDisabled}
