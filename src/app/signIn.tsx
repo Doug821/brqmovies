@@ -6,29 +6,46 @@ import { useSession } from '@/contexts/session';
 import { styles } from './styles';
 
 export default function SignIn() {
-  const { signIn } = useSession();
+  const { signIn, error, setError } = useSession();
+
+  const [credentials, setCredentials] = useState({
+    username: '',
+    password: '',
+  });
 
   const handleSignIn = () => {
-    signIn();
-    router.replace('/');
+    signIn(credentials);
+  };
+
+  const handleChange = (value: string, key: 'username' | 'password') => {
+    if (error) {
+      setError(null);
+    }
+
+    setCredentials({ ...credentials, [key]: value });
   };
 
   return (
     <View style={styles.container}>
       <Image source={require('../assets/images/icon.png')} />
       <View style={styles.inputWrapper}>
-        <TextInput
+        <Input
           placeholder='Usuário'
-          style={styles.input}
           placeholderTextColor='#fff'
+          onChangeText={(text) => handleChange(text, 'username')}
+          value={credentials.username}
+          errorMessage='Digite seu usuário'
+          icon={require('@/assets/icons/profile-icon.png')}
         />
-
-        <TextInput
+        <Input
           placeholder='Senha'
           secureTextEntry
           keyboardType='numeric'
-          style={styles.input}
           placeholderTextColor='#fff'
+          onChangeText={(text) => handleChange(text, 'password')}
+          value={credentials.password}
+          errorMessage='Digite sua senha'
+          icon={require('@/assets/icons/padlock-icon.png')}
         />
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button} onPress={handleSignIn}>
