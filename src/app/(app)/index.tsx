@@ -1,18 +1,41 @@
-import { useSession } from '@/contexts/session';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { router } from 'expo-router';
+import { FlatList, View } from 'react-native';
 
-export default function TabOneScreen() {
-  const { signOut } = useSession();
+import { useSession } from '@/contexts/session';
+
+import { MoovieCard } from '@/components';
+import { LogoutButton } from '@/components/LogoutButton/index.';
+
+import { styles } from './styles';
+
+export default function Home() {
+  const { signOut, isLogoutVisible, setIsLogoutVisible } = useSession();
   const handleSignOut = () => {
+    setIsLogoutVisible(false);
     signOut();
+  };
+
+  const handleGoToDetails = () => {
+    router.push('/details');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
-        <Text style={styles.label}>Sair</Text>
-      </TouchableOpacity>
+      {isLogoutVisible && <LogoutButton onPress={handleSignOut} />}
+      <FlatList
+        data={data.results || []}
+        style={styles.list}
+        ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
+        renderItem={({ item, index }) => (
+          <MoovieCard
+            moovie={item}
+            index={index}
+            onPress={handleGoToDetails}
+            activeOpacity={0.7}
+          />
+        )}
+        numColumns={2}
+      />
     </View>
   );
 }
