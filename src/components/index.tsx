@@ -1,3 +1,4 @@
 export { Button } from './Button';
 export { Input } from './Input';
-export { MoovieCard } from './MoovieCard';
+export { LogoutButton } from './LogoutButton';
+export { MovieCard } from './MovieCard';

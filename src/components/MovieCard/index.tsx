@@ -1,15 +1,14 @@
 import { Image, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 
-import { Moovie } from '@/@types/moovie';
-
+import { Movie } from '@/@types/movie';
 import { styles } from './styles';
 
-interface MoovieCardProps extends TouchableOpacityProps {
-  moovie: Moovie;
+interface MovieCardProps extends TouchableOpacityProps {
+  movie: Movie;
   index: number;
 }
 
-export const MoovieCard: React.FC<MoovieCardProps> = (props) => {
+export const MovieCard: React.FC<MovieCardProps> = (props) => {
   const margin = props.index % 2 === 0 ? { marginRight: 8 } : { marginLeft: 8 };
 
   return (
@@ -19,7 +18,7 @@ export const MoovieCard: React.FC<MoovieCardProps> = (props) => {
     >
       <Image
         source={{
-          uri: `https://image.tmdb.org/t/p/w500${props.moovie.poster_path}`,
+          uri: `https://image.tmdb.org/t/p/w500${props.movie.poster_path}`,
         }}
         style={{
           width: '100%',
