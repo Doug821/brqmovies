@@ -9,11 +9,6 @@ export const styles = StyleSheet.create({
         backgroundColor: '#16171b',
         gap: 68,
     },
-    label: {
-        color: '#2E2F33',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
     inputWrapper: {
         width: '100%',
         gap: 48,
@@ -29,14 +24,6 @@ export const styles = StyleSheet.create({
         borderTopLeftRadius: 4,
         borderBottomWidth: 1,
         borderBottomColor: '#fff',
-    },
-    button: {
-        backgroundColor: '#A9A9A9',
-        width: '100%',
-        height: 56,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 28,
     },
     buttonWrapper: {
         width: '100%',
