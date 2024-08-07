@@ -1,45 +1,44 @@
-import { useSession } from '@/contexts/session';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { router } from 'expo-router';
+import { FlatList, View } from 'react-native';
 
-export default function TabOneScreen() {
-  const { signOut } = useSession();
+import { useMovies } from '@/contexts/movies';
+import { useSession } from '@/contexts/session';
+
+import { LogoutButton, MovieCard } from '@/components';
+
+import { styles } from './styles';
+
+export default function Home() {
+  const { signOut, isLogoutVisible, setIsLogoutVisible } = useSession();
+  const { movies, setSelectedMovie } = useMovies();
+
   const handleSignOut = () => {
+    setIsLogoutVisible(false);
     signOut();
+  };
+
+  const handleGoToDetails = (id: number) => {
+    setSelectedMovie(id);
+    router.push('/details');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
-        <Text style={styles.label}>Sair</Text>
-      </TouchableOpacity>
+      {isLogoutVisible && <LogoutButton onPress={handleSignOut} />}
+      <FlatList
+        data={movies || []}
+        style={styles.list}
+        ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
+        renderItem={({ item, index }) => (
+          <MovieCard
+            movie={item}
+            index={index}
+            onPress={() => handleGoToDetails(item.id)}
+            activeOpacity={0.7}
+          />
+        )}
+        numColumns={2}
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 16,
-    gap: 68,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  label: {
-    color: '#2E2F33',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  button: {
-    backgroundColor: '#A9A9A9',
-    width: '100%',
-    height: 56,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 28,
-  },
-});

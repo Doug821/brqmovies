@@ -15,6 +15,8 @@ interface SessionContextData {
   error?: string | null;
   setError: (error: string | null) => void;
   isLoading: boolean;
+  isLogoutVisible: boolean;
+  setIsLogoutVisible: (isVisible: boolean) => void;
 }
 
 const SessionContext = createContext<SessionContextData | null>({
@@ -24,10 +26,13 @@ const SessionContext = createContext<SessionContextData | null>({
   error: null,
   setError: () => null,
   isLoading: false,
+  isLogoutVisible: false,
+  setIsLogoutVisible: () => null,
 });
 
 export function SessionProvider({ children }: PropsWithChildren) {
   const [error, setError] = useState<string | null>(null);
+  const [isLogoutVisible, setIsLogoutVisible] = useState<boolean>(false);
   const [[isLoading, session], setSession] = useStorageState('session');
 
   const signIn = (credentials: { username: string; password: string }) => {
@@ -51,6 +56,8 @@ export function SessionProvider({ children }: PropsWithChildren) {
     isLoading,
     error,
     setError,
+    isLogoutVisible,
+    setIsLogoutVisible,
   };
 
   return (

@@ -1,19 +1,14 @@
 import { useState } from 'react';
-import {
-    Image,
-    ImageSourcePropType,
-    Text,
-    TextInput,
-    TextInputProps,
-    View,
-} from 'react-native';
+import { Text, TextInput, TextInputProps, View } from 'react-native';
+
+import { IconProps } from '@/@types/icon';
 
 import { styles } from './styles';
 
 interface InputProps extends TextInputProps {
   color?: string;
   errorMessage?: string;
-  icon?: ImageSourcePropType;
+  icon?: React.FC<IconProps>;
 }
 
 export const Input: React.FC<InputProps> = (props) => {
@@ -50,7 +45,7 @@ export const Input: React.FC<InputProps> = (props) => {
           },
         ]}
       >
-        {props.icon && <Image source={props.icon} />}
+        {props.icon && <props.icon color={props.color} />}
         <TextInput
           {...props}
           style={[styles.input, props.style]}
