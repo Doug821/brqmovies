@@ -3,7 +3,10 @@ import { Image, Text, View } from 'react-native';
 
 import { useSession } from '@/contexts/session';
 
+import { Lock } from '@/assets/icons/Lock';
+import { User } from '@/assets/icons/User';
 import { Button, Input } from '@/components';
+
 import { styles } from './styles';
 
 export default function SignIn() {
@@ -45,7 +48,7 @@ export default function SignIn() {
           onChangeText={(text) => handleChange(text, 'username')}
           value={credentials.username}
           errorMessage='Digite seu usuário'
-          icon={require('@/assets/icons/profile-icon.png')}
+          icon={() => <User color='#fff' />}
         />
         <Input
           placeholder='Senha'
@@ -55,7 +58,7 @@ export default function SignIn() {
           onChangeText={(text) => handleChange(text, 'password')}
           value={credentials.password}
           errorMessage='Digite sua senha'
-          icon={require('@/assets/icons/padlock-icon.png')}
+          icon={() => <Lock color='#fff' />}
         />
         <View style={styles.buttonWrapper}>
           <Button
