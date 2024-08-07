@@ -1,3 +1,4 @@
+import { MoviesProvider } from './movies';
 import { SessionProvider } from './session';
 
 interface AppProviderProps {
@@ -5,5 +6,9 @@ interface AppProviderProps {
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => {
-  return <SessionProvider>{children}</SessionProvider>;
+  return (
+    <SessionProvider>
+      <MoviesProvider>{children}</MoviesProvider>
+    </SessionProvider>
+  );
 };

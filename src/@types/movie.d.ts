@@ -7,4 +7,6 @@ export interface Movie {
     vote_average: number;
     vote_count: number;
     popularity: number;
+    original_language: string;
+    popularity: number;
 }
