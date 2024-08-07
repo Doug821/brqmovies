@@ -6,7 +6,8 @@ import { useSession } from '@/contexts/session';
 
 import { ArrowBack } from '@/assets/icons/ArrowBack';
 import { Heart } from '@/assets/icons/Heart';
-import { HeaderMenu } from '@/components/HeaderMenu';
+
+import { HeaderMenu } from '@/components';
 
 export default function TabLayout() {
   const { isLoading, session, isLogoutVisible, setIsLogoutVisible } =

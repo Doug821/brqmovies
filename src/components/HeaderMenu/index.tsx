@@ -10,6 +10,7 @@ interface HeaderMenuProps extends TouchableOpacityProps {
 export const HeaderMenu: React.FC<HeaderMenuProps> = (props) => {
   return (
     <TouchableOpacity
+      testID='header-menu'
       {...props}
       style={[
         styles.container,
@@ -17,7 +18,10 @@ export const HeaderMenu: React.FC<HeaderMenuProps> = (props) => {
         props.style,
       ]}
     >
-      <Menu color={props.isMenuVisible ? '#16171B' : '#A9A9A9'} />
+      <Menu
+        testID='menu-icon'
+        color={props.isMenuVisible ? '#16171B' : '#A9A9A9'}
+      />
     </TouchableOpacity>
   );
 };
