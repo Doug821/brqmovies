@@ -1,16 +1,15 @@
 import { Stack } from 'expo-router';
+import { SafeAreaView, StatusBar } from 'react-native';
 import 'react-native-reanimated';
 
 import { AppProvider } from '@/contexts';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native';
 
 export { ErrorBoundary } from 'expo-router';
 
 export default function RootLayout() {
   return (
     <AppProvider>
-      <StatusBar style='light' />
+      <StatusBar backgroundColor='#16171B' />
       <SafeAreaView style={{ flex: 1 }}>
         <Stack initialRouteName='signIn'>
           <Stack.Screen name='signIn' options={{ headerShown: false }} />
