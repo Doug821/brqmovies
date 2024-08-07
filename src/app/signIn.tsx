@@ -1,10 +1,15 @@
 import { router } from 'expo-router';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
+import { useSession } from '@/contexts/session';
+
 import { styles } from './styles';
 
 export default function SignIn() {
+  const { signIn } = useSession();
+
   const handleSignIn = () => {
+    signIn();
     router.replace('/');
   };
 
