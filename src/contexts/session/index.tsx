@@ -1,11 +1,19 @@
-import { createContext, useContext, type PropsWithChildren } from 'react';
+import { router } from 'expo-router';
+import {
+  createContext,
+  useContext,
+  useState,
+  type PropsWithChildren,
+} from 'react';
 
 import { useStorageState } from '@/hooks/useStorageState';
 
 interface SessionContextData {
-  signIn: () => void;
+  signIn: (credentials: { username: string; password: string }) => void;
   signOut: () => void;
   session?: string | null;
+  error?: string | null;
+  setError: (error: string | null) => void;
   isLoading: boolean;
 }
 
@@ -13,14 +21,23 @@ const SessionContext = createContext<SessionContextData | null>({
   signIn: () => null,
   signOut: () => null,
   session: null,
+  error: null,
+  setError: () => null,
   isLoading: false,
 });
 
 export function SessionProvider({ children }: PropsWithChildren) {
+  const [error, setError] = useState<string | null>(null);
   const [[isLoading, session], setSession] = useStorageState('session');
 
-  const signIn = () => {
-    setSession('xxx');
+  const signIn = (credentials: { username: string; password: string }) => {
+    // It only simulates a login and sets a session if the username and password are user/123 respectively, otherwise it sets an error message
+    if (credentials.username === 'user' && credentials.password === '123') {
+      setSession('session');
+      router.replace('/');
+    } else {
+      setError('Usuário ou senha inválidos');
+    }
   };
 
   const signOut = () => {
@@ -32,6 +49,8 @@ export function SessionProvider({ children }: PropsWithChildren) {
     signOut,
     session,
     isLoading,
+    error,
+    setError,
   };
 
   return (
